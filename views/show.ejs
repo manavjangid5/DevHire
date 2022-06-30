@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Trending</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/show.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/developers/<%=dev._id %> ">
+          <h3 class="mt-1">
+            <img src="/uploads/<%= dev.devPic %> " width="40" height="40" class="rounded-circle" alt="" loading="lazy" />
+            <%= dev.firstName %>
+          </h3>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+          <ul class="navbar-nav mx-1">
+            <li class="nav-item active">
+              <a class="nav-link h6" href="/developers">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link h6" href="#">Company </a>
+            </li>
+          </ul>
+          <form action="/search" method="GET" class="form-inline ml-auto mr-auto">
+            <div class="form-group">
+              <input type="text" class="form-control mr-3" placeholder="Search companies" id="searchName" name="fltrname" class="form-control" />
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </form>
+          <form action="/logout" id="logout" method="POST" class="ml-auto">
+            <button class="btn sub mx-2" type="submit" onclick="document.getElementById('logout')">Logout</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container text-center mt-3">
+      <div class="row">
+        <% companies.forEach(comp => { %>
+        <div class="card col-sm-4 p-3">
+          <img src="/uploads/<%= comp.compPic %> " class="card-img-top" alt="<%= comp.name %> " height="300px"/>
+          <div class="card-body">
+            <h5 class="card-title"><%= comp.name %></h5>
+            <br>
+            <a href="/companies/<%= comp._id %>" target="_blank" class="btn btn-primary stretched-link">Go to <%= comp.name %>'s page</a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <br />
+    <br />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/javascript/show.js"></script>
+  </body>
+</html>

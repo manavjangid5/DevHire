@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= user.name %></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/stylesheets/companies.css" />
+  </head>
+
+  <body>
+    <!-- The Modal which opens when edit profile button gets clicked-->
+    <div class="modal" id="editProfileModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Edit your profile</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form action="/editComp/<%= user._id %> " method="POST" role="form" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="editName">Name *</label>
+                <input type="text" class="form-control" placeholder="Enter your name" id="editName" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="editCompPic">Upload company's label</label>
+                <input type="file" class="form-control" id="editCompPic" name="compPic" />
+              </div>
+              <div class="form-group">
+                <label for="editCoverPic">Upload company's cover</label>
+                <input type="file" class="form-control" id="editCoverPic" name="compCover" />
+              </div>
+              <div class="form-group">
+                <label for="editWebsite">Website *</label>
+                <input type="url" class="form-control" id="editWebsite" name="website" required />
+              </div>
+              <div class="form-group">
+                <label for="editHeadquarter">Enter company's headquarter *</label>
+                <input type="text" class="form-control" id="editHeadquarter" name="head" required />
+              </div>
+              <div class="form-group">
+                <label for="linkedin">LinkedIn</label>
+                <input type="url" class="form-control" id="linkedin" name="linkedin" />
+              </div>
+              <div class="form-group">
+                <label for="facebook">Facebook</label>
+                <input type="url" class="form-control" id="facebook" name="facebook" />
+              </div>
+              <div class="form-group">
+                <label for="twitter">Twitter</label>
+                <input type="url" class="form-control" id="twitter" name="twitter" />
+              </div>
+              <div class="form-group">
+                <label for="pininterest">Pininterest</label>
+                <input type="url" class="form-control" id="pininterest" name="pininterest" />
+              </div>
+              <div class="form-group">
+                <label for="instagram">Instagram</label>
+                <input type="url" class="form-control" id="instagram" name="instagram" />
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal which opens when post an offer button gets clicked-->
+    <div class="modal" id="postModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Job Details</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form action="/jobPost" method="POST" role="form">
+              <div class="form-group">
+                <label for="jobOffer">Job Offer</label>
+                <input type="text" class="form-control" placeholder="Enter Job Offer" id="jobOffer" name="jobOffer" required />
+              </div>
+              <div class="form-group">
+                <label for="description">Description </label>
+                <textarea
+                  rows="12"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Brief Description of Job"
+                  id="description"
+                  name="description"
+                  required
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="tags">Tags </label>
+                <input type="text" class="form-control" placeholder="Tags" id="tags" name="tags" required />
+              </div>
+              <div class="form-group">
+                <label for="endDate">Ending date for application</label>
+                <input type="date" class="form-control" id="endDate" name="endDate" />
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal which opens when post an update button gets clicked-->
+    <div class="modal" id="updateModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">New Update</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form action="/updatePost" method="POST" role="form">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" placeholder="Enter Title" id="title" name="title" required />
+              </div>
+              <div class="form-group">
+                <label for="description">Description </label>
+                <textarea
+                  rows="12"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter an update"
+                  id="description"
+                  name="description"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--The Modal which opens when editPost button gets clicked-->
+    <div class="modal" id="editModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Job Details</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form action="/" method="POST" role="form" id="editPost">
+              <div class="form-group">
+                <label for="editJobOffer">Job Offer</label>
+                <input type="text" class="form-control" placeholder="Enter Job Offer" id="editJobOffer" name="editJobOffer" value="" required />
+              </div>
+              <div class="form-group">
+                <label for="editDescription">Description </label>
+                <textarea
+                  rows="12"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Brief Description of Job"
+                  id="editDescription"
+                  name="editDescription"
+                  required
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="editTags">Tags </label>
+                <input type="text" class="form-control" placeholder="Tags" id="editTags" name="editTags" required />
+              </div>
+              <div class="form-group">
+                <label for="editEndDate">Ending date for application</label>
+                <input type="date" class="form-control" id="editEndDate" name="editEndDate" required />
+              </div>
+
+              <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal which opens when delete post button gets clicked-->
+    <div class="modal" id="deleteModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Do you want to delete this post ?</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            Oops by continuing to delete this post you may loose all it's content and its data. <br />
+            To proceed with it click on the delete cutton or you can cancel it too.
+          </div>
+          <button class="btn btn-danger btn-inline"  id="deletePost">Delete</button>
+          <button type="button" class="btn btn-success btn-inline" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a href="companies/<%= user._id %> ">
+            <img src="/uploads/<%=user.compPic %>" class="rounded mr-3" class="container" alt="<%= user.name %> " style="color: beige" height="50" />
+          </a>
+          <h3 class="text-white"><%= user.name %></h3>
+          <button
+            class="navbar-toggler collapsed"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+            <button
+              type="button"
+              class="btn sub ml-auto mr-2 mt-2 mb-2"
+              data-user="<%= JSON.stringify(user) %>"
+              data-target="#editProfileModal"
+              data-toggle="modal"
+              id="profile"
+            >
+              Edit profile
+            </button>
+            <form action="/logout" id="logout" method="POST" class="mt-2 mb-2">
+              <button class="btn sub mx-2" type="submit" onclick="document.getElementById('logout')">Logout</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <img src="/uploads/<%= user.coverPic %> " alt="Cover Photo" class="mt-2 border rounded" height="300px" width="100%" />
+      </div>
+    </header>
+
+    <% if(user.posts.length>0) { %>
+
+    <!-- body of page that contains company details -->
+    <div class="container mt-5 posting">
+      <button type="button" class="btn btn-outline-primary m-2" data-toggle="modal" data-target="#postModal">Post an offer</button>
+      <button type="button" class="btn btn-outline-primary m-2" data-toggle="modal" data-target="#updateModal">Post an Update</button>
+    </div>
+
+    <!--recent posts fetched from database-->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-sm-7">
+          <h1>Recent Posts</h1>
+          <div class="row">
+            <% for (var i = 0; i < user.posts.length; i++) { %>
+            <div class="col-sm-12 ml-auto mr-auto">
+              <div class="card shadow bg-white rounded">
+                <div class="card-body">
+                  <h4 class="card-title text-bold"><%= user.posts[i].jobOffer %></h4>
+                  <p><%= user.posts[i].tags %></p>
+                  <br />
+                  <div class="card-text"><%= user.posts[i].description %></div>
+                  <br />
+                  <h5>Applied <span class="badge badge-primary badge-pill"><%= user.posts[i].applied.length %></span></h5>
+                  <br />
+                  <button
+                    data-post="<%= JSON.stringify(user.posts[i]) %>"
+                    type="button"
+                    class="edit-xyz btn btn-success m-2"
+                    data-toggle="modal"
+                    data-target="#editModal"
+                  >
+                    Edit the post
+                  </button>
+                  <button
+                    data-post="<%= JSON.stringify(user.posts[i]) %>"
+                    type="button"
+                    class="del-post btn btn-danger m-2"
+                    data-toggle="modal"
+                    data-target="#deleteModal"
+                  >
+                    Delete the post
+                  </button>
+                  <a href="/companies/applications/<%= user.posts[i].id %> " target="_blank">
+                    <button type="submit" class="del-post btn btn-primary mr-auto">Application's Stats</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <h3>Recent Updates</h3>
+          <div class="row">
+            <% user.update.forEach(upd => {%>
+            <div class="col-sm-12">
+              <div class="accordion" id="accordionUpdate">
+                <div class="card">
+                  <div class="card-header" id="head">
+                    <h2 class="mb-0">
+                      <button
+                        class="btn btn btn-block text-left"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapse"
+                        aria-expanded="true"
+                        aria-controls="collapse"
+                      >
+                        <%= upd.title %>
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapse" class="collapse" aria-labelledby="head" data-parent="#accordionUpdate">
+                    <div class="card-body"><%= upd.description %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } else {%>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h3 class="mt-5">Welcome to devhire... Post a new job offer to inform everyone of your arrival!</h3>
+          <button type="button" class="btn btn-primary align-right mt-5" data-toggle="modal" data-target="#postModal">Post an offer</button>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/javascript/companies.js"></script>
+  </body>
+</html>

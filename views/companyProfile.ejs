@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= user.name %>'s Profile </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/stylesheets/companyProfile.css" />
+  </head>
+  <body>
+    <!--Navbar-->
+    <% if(session.dev){ %>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a href="/companies">
+          <img src="/uploads/<%=user.compPic %>" class="rounded mr-3" class="container" alt="<%= user.name %> " style="color: beige" height="50" />
+        </a>
+        <h3 class="text-white"><%= user.name %></h3>
+      </div>
+    </nav>
+    <% } else { %>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a href="companies/<%= user._id %> ">
+          <img src="/uploads/<%=user.compPic %>" class="rounded mr-3" class="container" alt="<%= user.name %> " style="color: beige" height="50" />
+        </a>
+        <h3 class="text-white"><%= user.name %></h3>
+        <button
+          class="navbar-toggler collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+          <form action="/logout" id="logout" method="POST" class="mt-2 mb-2">
+            <button class="btn sub mx-2" type="submit" onclick="document.getElementById('logout')">Logout</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <% } %>
+    <!--Basic-->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col sm-10">
+          <div class="card">
+            <img class="card-img-top" src="/uploads/<%= user.coverPic %> " width="100%" height="300px" alt="cover photo" />
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-8">
+                  <h3 class="card-title"><%= user.name %></h3>
+                  <p>
+                    <% if(session.dev) {%> <% if(session.dev.subscribed.includes(user._id.toString(), 0)) {%>
+                    <button data-comp="<%= JSON.stringify(user)%> " type="button" class="unsubs btn btn-outline-success">Subscribed</button>
+                    <% }else { %>
+                    <button type="button" class="btn subs btn-primary btn-sm" data-comp="<%= JSON.stringify(user)%>">Subscribe</button>
+                    <% } %> <%}%>
+
+                    <a href="<%= user.website %> " type="button" class="btn btn-primary btn-sm">Visit Website</a>
+                  </p>
+                  <p class="text-muted align-right mt-3">
+                    Subscribers<span class="badge bg-success rounded-circle pt-1 pb-1 pr-2 pl-2 ml-2 text-dark"><%= user.subscribers.length %> </span>
+                  </p>
+                </div>
+                <div class="col-sm-4 d-flex">
+                  <div class="m-auto">
+                    <a href="<%= user.linkedin %>" class="btn"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    <a href="<%= user.facebook %>" class="btn"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="<%= user.twitter %>" class="btn"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="<%= user.instagram %>" class="btn"><i class="fab fa-instagram-square fa-lg"></i></a>
+                    <a href="<%= user.pininterest %>" class="btn"><i class="fab fa-pinterest fa-lg"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--about the company-->
+    <div class="container mt-5">
+      <dl class="basic-info">
+        <div class="row">
+          <div class="col-sm-3">
+            <dt>Website</dt>
+          </div>
+          <div class="col-sm-5">
+            <dd>
+              <a class="external-link about-us__link" href="<%= user.website %>" data-tracking-control-name="about_website" target="_blank">
+                http://www.<%= user.website %>
+              </a>
+            </dd>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <dt>Headquarters</dt>
+          </div>
+          <div class="col-sm-5">
+            <dd><%= user.headquarter%></dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+
+    <!--recent post -->
+    <div class="container mt-5">
+      <h2 class="text-center">Recent Posts</h2>
+      <hr class="bg-dark" />
+      <br />
+      <div class="row">
+        <% for (var i = 0; i < user.posts.length; i++) { %>
+        <div class="col-md-6 col-sm-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title"><%= user.posts[i].jobOffer %></h4>
+              <p class="card-subtitle mb-2 text-muted justify-content-end">posted on <%= user.posts[i].createdAt.toDateString() %></p>
+              <hr class="bg-dark" />
+              <p class="card-text"><%= user.posts[i].tags %></p>
+              <br />
+              <p class="card-text"><%= user.posts[i].description %></p>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/javascript/companyProfile.js"></script>
+  </body>
+</html>
