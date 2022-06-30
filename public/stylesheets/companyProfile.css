@@ -1,0 +1,52 @@
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f7fbfc;
+}
+
+nav {
+  background-color: #769fcd;
+}
+
+.sub {
+  border: #b9d7ea solid 2px;
+}
+.sub:hover {
+  background-color: #b9d7ea;
+  border: #b9d7ea solid 2px;
+}
+.btn-primary:hover {
+  background-color: #2f00ff;
+}
+
+.posting button{
+  background-color: #b9d7ea;
+}
+
+.card {
+  background-color: #d6e6f2a8;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+hr,
+h6 {
+  color: rgb(20, 13, 13);
+}
+
+a{
+  text-decoration: none;
+}
+
+.modal-content{
+  background-color: #f7fbfc;
+}
+.modal-header{
+  background-color: #769fcd;
+}
+.modal-title{
+  color: rgb(12, 30, 46);
+}
