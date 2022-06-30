@@ -1,2 +1,2 @@
 # DevHire
-A job portal web application
+A Job Portal Web Application
